@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* EasyMage ProductGift
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so you can be sent a copy immediately.
+*
+* Original code copyright (c) 2006-2016 X.commerce, Inc. (http://www.magento.com)
+*
+* @package    EasyMage ProductGift
+* @author     Konstantin Dubovik
+* @contact    kodubovik@gmail.com
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <EasyMage_ProductGift>
+            <version>0.1.0</version>
+        </EasyMage_ProductGift>
+    </modules>
+    <global>
+        <models>
+            <easymage_productgift>
+                <class>EasyMage_ProductGift_Model</class>
+            </easymage_productgift>
+        </models>
+        <blocks>
+            <easymage_productgift>
+                <class>EasyMage_ProductGift_Block</class>
+            </easymage_productgift>
+        </blocks>
+        <resources>
+            <easymage_productgift_setup>
+                <setup>
+                    <module>EasyMage_ProductGift</module>
+                    <class>EasyMage_ProductGift_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </easymage_productgift_setup>
+            <easymage_productgift_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </easymage_productgift_write>
+            <easymage_productgift_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </easymage_productgift_read>
+        </resources>
+        <helpers>
+    		<easymage_productgift>
+    			<class>EasyMage_ProductGift_Helper</class>
+    		</easymage_productgift>
+    	</helpers>
+    	<events>
+        	<catalog_product_save_before>
+				<observers>
+					<easymage_productgift_observer>
+						<type>singleton</type>
+						<class>easymage_productgift/observer</class>
+						<method>checkSKU</method>
+					</easymage_productgift_observer>
+				</observers>
+			</catalog_product_save_before>
+		</events>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <easymage_productgift>
+                    <file>easymage/productgift.xml</file>
+                </easymage_productgift>
+            </updates>
+        </layout>
+    	<events>
+    		<checkout_cart_product_add_after>
+                <observers>
+                    <easymage_productgift_observer>
+                        <type>singleton</type>
+                        <class>easymage_productgift/observer</class>
+                        <method>addGift</method>
+                    </easymage_productgift_observer>
+                </observers>
+            </checkout_cart_product_add_after>
+            <sales_quote_remove_item>
+            	<observers>
+                    <easymage_productgift_observer>
+                        <type>singleton</type>
+                        <class>easymage_productgift/observer</class>
+                        <method>deleteGift</method>
+                    </easymage_productgift_observer>
+                </observers>
+            </sales_quote_remove_item>
+            <checkout_cart_update_items_after>
+            	<observers>
+                    <easymage_productgift_observer>
+                        <type>singleton</type>
+                        <class>easymage_productgift/observer</class>
+                        <method>updateGiftCart</method>
+                    </easymage_productgift_observer>
+                </observers>
+            </checkout_cart_update_items_after>
+    	</events>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <EasyMage_ProductGift before="Mage_Adminhtml">EasyMage_ProductGift_Adminhtml</EasyMage_ProductGift>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <easymage_productgift>
+                    <file>easymage/productgift.xml</file>
+                </easymage_productgift>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* EasyMage ProductGift
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so you can be sent a copy immediately.
+*
+* Original code copyright (c) 2006-2016 X.commerce, Inc. (http://www.magento.com)
+*
+* @package    EasyMage ProductGift
+* @author     Konstantin Dubovik
+* @contact    kodubovik@gmail.com
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <menu>
+        <easymage translate="title" module="easymage_productgift">
+            <title>EasyMage</title>
+            <sort_order>100</sort_order>
+            <children>
+                <productgift translate="title" module="easymage_productgift">
+                    <title>Manage Productgift</title>
+                    <action>adminhtml/productgift</action>
+                    <sort_order>10</sort_order>
+                </productgift>
+                <configuration translate="title" module="easymage_productgift">
+                    <title>Configuration</title>
+                    <action>adminhtml/system_config/edit/section/productgift_options</action>
+                    <sort_order>20</sort_order>
+                </configuration>
+            </children>
+        </easymage>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <easymage translate="title" module="easymage_productgift">
+                        <title>EasyMage</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <productgift translate="title">
+                                <title>Manage Productgift</title>
+                                <sort_order>0</sort_order>
+                            </productgift>
+                        </children>
+                    </easymage>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <productgift_options translate="title" module="easymage_productgift">
+                                        <title>EasyMage Productgift Section</title>
+                                    </productgift_options>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

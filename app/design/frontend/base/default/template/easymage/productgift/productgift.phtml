@@ -1,0 +1,95 @@
+<?php
+/**
+ * EasyMage ProductGift
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so you can be sent a copy immediately.
+ *
+ * Original code copyright (c) 2006-2016 X.commerce, Inc. (http://www.magento.com)
+ *
+ * @package    EasyMage ProductGift
+ * @author     Konstantin Dubovik
+ * @contact    kodubovik@gmail.com
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/**
+ * Product gift view template
+ *
+ * @see EasyMage_ProductGift_Block_Productgift
+ */
+?>
+<?php
+$current_product = Mage::registry('current_product');
+$gift_enabled = $this->checkGiftEnabled($current_product);
+$gift_product = $this->getGiftProduct($current_product);
+?>
+<?php if($gift_enabled && $gift_product): ?>
+    <?php
+    $gift_name = $gift_product->getName();
+    $gift_image = Mage::helper('catalog/image')->init($gift_product, 'small_image')->resize(78);
+    $gift_url = $gift_product->getProductUrl();
+    $gift_price = Mage::helper('core')->currency($gift_product->getPrice());
+    $current_currency = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+    ?>
+    <div id="gift-box">
+        <div class="gift-message">
+            <?php echo $this->__('Buy %s and get a gift!', $current_product->getName()) ?>
+        </div>
+        <div class="gift-product">
+            <div class="gift-title">
+                <a href="<?php echo $gift_url ?>">
+                    <span><?php echo $gift_name ?></span>
+                </a>
+            </div>
+            <div class="gift-info">
+                <div class="gift-img">
+                    <a href="<?php echo $gift_url ?>">
+                        <img src="<?php echo $gift_image ?>" alt="<?php echo $gift_name ?>">
+                    </a>
+                </div>
+                <div class="gift-price-before">
+                    <span><?php echo $this->__('for price') ?></span>
+                </div>
+                <div class="gift-price">
+                    <span class="old-price"><?php echo $gift_price ?></span>
+                    <span class="new-price"><?php echo "0,00 " . $current_currency ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #gift-box {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        .gift-message {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .gift-info {
+            clear: both;
+            height: 80px;
+        }
+        .gift-img, .gift-price-before, .gift-price {
+            float: left;
+            line-height: 80px;
+        }
+        .gift-price-before, .gift-price {
+            padding-left: 20px;
+        }
+        .gift-price .old-price {
+            text-decoration: line-through;
+            color: red;
+        }
+    </style>
+<?php endif; ?>

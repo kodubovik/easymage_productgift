@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+* EasyMage FooterScript
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so you can be sent a copy immediately.
+*
+* Original code copyright (c) 2006-2016 X.commerce, Inc. (http://www.magento.com)
+*
+* @package    EasyMage FooterScript
+* @author     Konstantin Dubovik
+* @contact    kodubovik@gmail.com
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+
+<config>
+    <tabs>
+        <easymage_tab translate="label" module="easymage_productgift">
+            <label>EasyMage</label>
+            <sort_order>1</sort_order>
+        </easymage_tab>
+    </tabs>
+    <sections>
+        <productgift_options translate="label" module="easymage_productgift">
+            <label>Productgift</label>
+            <tab>easymage_tab</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>General</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <gift_strategy translate="label comment">
+                            <label>Gift strategy</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>
+                                <![CDATA[
+                                <ul style="font-size:.85em;list-style-type:disc;list-style-position: inside;">
+                                    <li>One gift per order - you can add only one gift to your order no matter how many special items in your cart.</li>
+                                    <li>One gift per item - the quantity of special items will be equal to the quantity of gift items.</li>
+                                    </ul>
+                                ]]>
+                            </comment>
+                            <source_model>easymage_productgift/config_giftstrategy</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </gift_strategy>
+                        <gift_config translate="label">
+                            <label>Productgift config</label>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </gift_config>
+                    </fields>
+                </general>
+            </groups>
+        </productgift_options>
+    </sections>
+</config>
